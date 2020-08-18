@@ -1,0 +1,21 @@
+service: marusia-skill-echo-golang
+
+plugins:
+  - serverless-offline
+
+custom:
+  stage: ${opt:stage, self:provider.defaultStage}
+
+provider:
+  name: aws
+  runtime: go1.x
+  defaultStage: production
+  region: eu-central-1
+
+functions:
+  webhook:
+    handler: bin/webhook
+    events:
+      - http:
+          path: webhook
+          method: post
